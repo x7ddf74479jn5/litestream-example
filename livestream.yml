@@ -1,0 +1,4 @@
+dbs:
+  - path: ./data.db
+    replicas:
+      - url: gcs://litestream_with_next_on_cloud_run_example220917/replicas

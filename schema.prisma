@@ -1,0 +1,26 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider             = "sqlite"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model todouhuken {
+  id      Int       @id
+  name    String
+  ranking ranking[]
+}
+
+model ranking {
+  id           String     @id @default(uuid())
+  name         String
+  todouhukenId Int
+  rank         Int
+  todouhuken   todouhuken @relation(fields: [todouhukenId], references: [id])
+
+  @@unique([name, todouhukenId])
+}
